@@ -1,0 +1,41 @@
+<html>
+	
+<head>
+	<script src="second_level_draft.js"></script>
+
+	<script>
+		// var global = window; // window for browser environments
+	    // 		for (var prop in global) {
+        // 			console.log(prop);
+        // }
+
+  		var second_level_layer1 = TileMaps.second_level_draft.layers[0];
+  		var level_data = second_level_layer1.data;
+
+  		var level_width = second_level_layer1.width;
+  		var level_height = second_level_layer1.height;
+
+  		console.log("level_width: " + level_width);
+  		console.log("level_height: " + level_height);
+
+  		var level_string = "";
+  		for (var y = 0; y < level_height; y++) {
+  			for (var x = 0; x < level_width; x++) {
+  				var target = level_data[x + y * level_width];
+  				level_string += " " + target;
+  			}
+  			console.log(level_string);
+  			level_string = "";
+  		}
+
+  		console.log(second_level_layer1.width);
+
+	</script>
+
+</head>
+
+<body>
+	
+</body>
+
+</html>
