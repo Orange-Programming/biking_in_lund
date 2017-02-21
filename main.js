@@ -6,7 +6,6 @@ var biker_object;
 var rightPressed = false;
 var leftPressed = false;
 
-
 window.onload=function() {
 	c = document.getElementById('gc');
 	cc = c.getContext('2d');
