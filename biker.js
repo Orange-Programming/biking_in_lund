@@ -6,6 +6,9 @@ function Biker(canvas) {
 	this.x_position = canvas.width / 2;
 	this.y_position = canvas.height / 6;
 
+	this.width = 64;
+	this.height = 64;
+
 	this.movement = 5;
 
 	this.image = new Image();
@@ -36,7 +39,8 @@ function Obstacle(canvas, x_position, y_position){
     this.canvas = canvas;
     this.canvas_context = canvas.getContext('2d');
 
-    this.diameter = 50;
+    this.width = 50;
+    this.height = 50;
 
     this.x_position = x_position;
     this.y_position = y_position;
@@ -47,7 +51,7 @@ function Obstacle(canvas, x_position, y_position){
 Obstacle.prototype.draw = function() {
     this.canvas_context.fillStyle = 'green';
     this.canvas_context.fillRect(this.x_position,
-        this.y_position, this.diameter, this.diameter);
+        this.y_position, this.width, this.height);
 }
 
 Obstacle.prototype.update = function() {
@@ -55,4 +59,5 @@ Obstacle.prototype.update = function() {
     this.y_position-=this.movement
 
 }
+
 
