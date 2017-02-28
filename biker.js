@@ -68,4 +68,38 @@ Obstacle.prototype.update = function() {
 
 }
 
+function Walker(canvas, x_position, y_position){
+	this.canvas = canvas;
+	this.canvas_context = canvas.getContext("2d");
+
+	this.width = 15;
+	this.height = 30;
+
+	this.x_position = x_position;
+	this.y_position = y_position;
+	this.x_start = x_position;
+	this.limit = 40;
+	this.direction = 1;
+
+	this.movement = 5;
+	this.walk = 3;
+}
+
+Walker.prototype.draw = function() {
+    this.canvas_context.fillStyle = 'orange';
+    this.canvas_context.fillRect(this.x_position,
+        this.y_position, this.width, this.height);
+}
+
+Walker.prototype.update = function() {
+
+    this.y_position-=this.movement;
+
+    if(this.x_position > this.x_start + this.limit || this.x_position < this.x_start - this.limit) {
+    	this.direction = -this.direction;
+    }
+    this.x_position-=this.direction * this.walk;
+}
+
+
 

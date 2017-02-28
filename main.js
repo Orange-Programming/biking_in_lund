@@ -17,6 +17,8 @@ window.onload=function() {
 	c = document.getElementById('gc');
 	cc = c.getContext('2d');
 
+	background.loadLevel("level2", cc);
+
 	biker_object = new Biker(c);
 	objects.push(biker_object);
 	//objects.push(new Obstacle(c, 300, 300));
@@ -56,6 +58,14 @@ function update() {
 	       var y_position = c.height;
 	       objects.push(new Obstacle(c, x_position, y_position));
 	   }
+	}
+	if (frame_counter % 37 === 0){
+	    for (var i = 0; i < 1; i++){
+	        var x_position = Math.random()*(c.width-50);
+	        var y_position = c.height;
+	        x_position = Math.random()*(c.width-50);
+	        objects.push(new Walker(c, x_position, y_position))
+	    }
 	}
 
 
@@ -118,7 +128,8 @@ function collision(){
 
 function draw() {
 	cc.fillStyle = 'black';
-	cc.fillRect(0, 0, c.width, c.height);
+    background.drawLevel(cc);
+	// cc.fillRect(0, 0, c.width, c.height);
 	biker_object.draw();
 	for (var i = 0; i < objects.length; i++){
         objects[i].draw();

@@ -9,7 +9,7 @@ function get_level_elements(level) {
   }
   else if (level == "level2") {
     // This will be changed to something else
-    layer1 = TileMaps.test_level.layers[0];
+    layer1 = TileMaps.full_tile_level.layers[0];
   }
   else {
     throw "Element " + level + " not implemented";
