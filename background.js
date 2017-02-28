@@ -1,13 +1,16 @@
 var background = (function background() {
 
 	var tile_size = 32;
-	var tile_cols = 3;
+	var tile_cols = 6;
+
+	var y_shift = 0;
+	var tot_height = 2560;  // TODO: Generalize
+	var scroll_speed = 10;
 
 	var level_data;
 
-	var tileset = "static/img/grass_tileset_32px.png";
+	var tileset = "static/img/tileset.png";
 	var tile_image;
-	// var tile_sprite;
 
 	function loadLevel(level) {
 
@@ -19,6 +22,8 @@ var background = (function background() {
 	}
 
 	function drawLevel(canvas) {
+
+		y_shift += scroll_speed;
 
 		if (!level_data) {
 			throw Exception("Need to call loadLevel before drawing!");
@@ -38,8 +43,15 @@ var background = (function background() {
 	}
 
 	function drawTile(canvas, x, y, tile_nbr) {
+
+		var current_target_y = (y * tile_size - y_shift);
+		while (current_target_y < -tile_size) {
+			current_target_y += tot_height;
+		}
+
 		var tile_pos = getTilePosition(tile_nbr - 1);
-		canvas.drawImage(time_image, tile_pos.x, tile_pos.y, 32, 32, x * tile_size, y * tile_size, 32, 32);
+		canvas.drawImage(time_image, tile_pos.x, tile_pos.y, 32, 32, 
+			x * tile_size, current_target_y, 32, 32);
 	}
 
 	function getTilePosition(tile_nbr) {
