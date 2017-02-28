@@ -6,6 +6,8 @@ var objects = [];
 
 var rightPressed = false;
 var leftPressed = false;
+var upPressed = false;
+var downPressed = false;
 
 var score = 0;
 
@@ -23,11 +25,18 @@ window.onload=function() {
 	setInterval(update, 1000/30);
 
 	function keyDownHandler(event) {
+
+		if(event.keyCode == 40) { 
+			upPressed = true;
+		}
 		if(event.keyCode == 39) {
 			rightPressed = true;
 		}
-		else if(event.keyCode == 37) {
+		if(event.keyCode == 37) {
 			leftPressed = true;
+		}
+		if(event.keyCode == 38) { 
+			downPressed = true;
 		}
 	}
 
@@ -35,8 +44,14 @@ window.onload=function() {
 		if(event.keyCode == 39) {
 			rightPressed = false;
 		}
-		else if(event.keyCode == 37) {
+		if(event.keyCode == 37) {
 			leftPressed = false;
+		}
+		if(event.keyCode == 40) { 
+			upPressed = false;
+		}
+		if(event.keyCode == 38) { 
+			downPressed = false;
 		}
 	}
 
@@ -65,7 +80,7 @@ function update() {
 	    }
 	}
 
-	biker_object.update(rightPressed, leftPressed);
+	biker_object.update(rightPressed, leftPressed, upPressed, downPressed);
 
 
 

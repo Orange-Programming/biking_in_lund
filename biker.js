@@ -18,15 +18,28 @@ function Biker(canvas) {
 }
 
 
-Biker.prototype.update = function(rightPressed, leftPressed) {
+Biker.prototype.update = function(rightPressed, leftPressed,downPressed,upPressed) {
 
-	if (rightPressed) {
-		this.x_position += this.movement;
+	if (upPressed) { // breaking  - can't move sideways or down
+		this.y_position -= this.movement;
 	}
-	else if (leftPressed) {
-		this.x_position -= this.movement;
-	}
+
+	else { // compatible movements
+		if (downPressed) { // accelerate 
+			this.y_position += this.movement;
+		} 
+		if (rightPressed) { // can also move right
+			this.x_position += this.movement;
+		}
+		if (leftPressed) { // or left
+			this.x_position -= this.movement;
+		}
+		// if both left and right, biker doesn't move in x-direction
+	} 
+
 	this.sprite.update();
+
+
 }
 
 
@@ -74,7 +87,7 @@ function Walker(canvas, x_position, y_position){
 	this.direction = 1;
 
 	this.movement = 5;
-	this.walk = 3;
+	this.walk_step = 3;
 }
 
 Walker.prototype.draw = function() {
@@ -85,12 +98,12 @@ Walker.prototype.draw = function() {
 
 Walker.prototype.update = function() {
 
-    this.y_position-=this.movement;
+    this.y_position -= this.movement;
 
     if(this.x_position > this.x_start + this.limit || this.x_position < this.x_start - this.limit) {
     	this.direction = -this.direction;
     }
-    this.x_position-=this.direction * this.walk;
+    this.x_position -= this.direction * this.walk_step;
 }
 
 
