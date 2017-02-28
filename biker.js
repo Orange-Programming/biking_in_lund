@@ -11,10 +11,16 @@ function Biker(canvas) {
 
 	this.movement = 5;
 
+	this.is_alive = true;
+
 	this.image = new Image();
 	this.image.src = "static/img/biker_large.png";
 
 	this.sprite = sprite(this.canvas_context, 256, 64, this.image, 4, true);
+}
+
+Biker.prototype.is_hit = function() {
+	this.is_alive = false;
 }
 
 
@@ -31,7 +37,9 @@ Biker.prototype.update = function(rightPressed, leftPressed) {
 
 
 Biker.prototype.draw = function() {
-	this.sprite.render(this.x_position, this.y_position);
+	if (this.is_alive) {
+		this.sprite.render(this.x_position, this.y_position);		
+	}
 }
 
 

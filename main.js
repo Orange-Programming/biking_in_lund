@@ -49,7 +49,7 @@ window.onload=function() {
 
 function update() {
 
-	frame_counter++
+	frame_counter++;
 	if (frame_counter % 30 === 0){
 		for (var i = 0; i < 1; i++){
 	       var x_position = Math.random()*(c.width-50);
@@ -78,14 +78,17 @@ function update() {
     //console.log("length: " + objects.length);
     if (collision()){
     	if (collision() === 'biker') {
-    		console.log('end game');	
+    		//console.log('end game');
+    		//alert('you lost')
+    		biker_object.is_hit();
     	}
     	else {
     		console.log('change path');
     	}
+	}
 	draw();
 	score += 0.3
-	}
+
 }
 
 function collision(){
