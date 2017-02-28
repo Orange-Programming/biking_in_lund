@@ -17,6 +17,8 @@ window.onload=function() {
 	c = document.getElementById('gc');
 	cc = c.getContext('2d');
 
+	background.loadLevel("level2", cc);
+
 	biker_object = new Biker(c);
 	objects.push(biker_object);
 
@@ -98,7 +100,8 @@ function collision(){
 
 function draw() {
 	cc.fillStyle = 'black';
-	cc.fillRect(0, 0, c.width, c.height);
+    background.drawLevel(cc);
+	// cc.fillRect(0, 0, c.width, c.height);
 	biker_object.draw();
 	for (var i = 0; i < objects.length; i++){
         objects[i].draw();
