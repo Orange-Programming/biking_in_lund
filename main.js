@@ -13,6 +13,7 @@ var score = 0;
 
 var frame_counter = 0;
 
+var boundary_margin = 20;
 
 
 window.onload=function() {
@@ -25,7 +26,6 @@ window.onload=function() {
 	setInterval(update, 1000/30);
 
 	function keyDownHandler(event) {
-
 		if(event.keyCode == 40) { 
 			upPressed = true;
 		}
@@ -57,8 +57,6 @@ window.onload=function() {
 
 	document.addEventListener("keydown", keyDownHandler, false);
 	document.addEventListener("keyup", keyUpHandler, false);
-
-
 }
 
 function update() {
@@ -117,7 +115,6 @@ function collision(){
 	}
 	return false;
 }
-
 
 function draw() {
 	cc.fillStyle = 'black';

@@ -11,6 +11,8 @@ function Biker(canvas) {
 
 	this.movement = 5;
 
+	this.boundary_margin = 20;
+
 	this.image = new Image();
 	this.image.src = "static/img/biker_large.png";
 
@@ -20,26 +22,24 @@ function Biker(canvas) {
 
 Biker.prototype.update = function(rightPressed, leftPressed,downPressed,upPressed) {
 
-	if (upPressed) { // breaking  - can't move sideways or down
+	if (upPressed && this.upBoundaryCheck()) { // breaking  - can't move sideways or down
 		this.y_position -= this.movement;
 	}
 
 	else { // compatible movements
-		if (downPressed) { // accelerate 
-			this.y_position += this.movement;
+		if (downPressed && this.downBoundaryCheck()) { // accelerate 
+			 	this.y_position += this.movement;
 		} 
-		if (rightPressed) { // can also move right
+		if (rightPressed && this.rightBoundaryCheck()) { // can also move right
 			this.x_position += this.movement;
 		}
-		if (leftPressed) { // or left
+		if (leftPressed && this.leftBoundaryCheck()) { // or left
 			this.x_position -= this.movement;
 		}
 		// if both left and right, biker doesn't move in x-direction
 	} 
 
 	this.sprite.update();
-
-
 }
 
 
@@ -47,6 +47,27 @@ Biker.prototype.draw = function() {
 	this.sprite.render(this.x_position, this.y_position);
 }
 
+// returns true if illegal position
+Biker.prototype.leftBoundaryCheck = function() {
+	if (biker_object.x_position > 0 + boundary_margin){
+		return true;
+	} return false;
+}
+Biker.prototype.rightBoundaryCheck = function() {
+	if (biker_object.x_position < this.canvas.width - boundary_margin){
+		return true;
+	} return false;
+}
+Biker.prototype.upBoundaryCheck = function() {
+	if (biker_object.y_position > 0 + boundary_margin){
+		return true;
+	} return false;
+}
+Biker.prototype.downBoundaryCheck = function() {
+	if (biker_object.y_position < this.canvas.height - boundary_margin){
+		return true;
+	} return false;
+}
 
 function Obstacle(canvas, x_position, y_position){
     this.canvas = canvas;
