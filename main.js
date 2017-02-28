@@ -19,6 +19,7 @@ window.onload=function() {
 
 	biker_object = new Biker(c);
 	objects.push(biker_object);
+	//objects.push(new Obstacle(c, 300, 300));
 
 	setInterval(update, 1000/30);
 
@@ -51,11 +52,12 @@ function update() {
 	frame_counter++
 	if (frame_counter % 30 === 0){
 		for (var i = 0; i < 1; i++){
-	        var x_position = Math.random()*(c.width-50);
-	        var y_position = c.height;
-	        objects.push(new Obstacle(c, x_position, y_position));
-	    }
+	       var x_position = Math.random()*(c.width-50);
+	       var y_position = c.height;
+	       objects.push(new Obstacle(c, x_position, y_position));
+	   }
 	}
+
 
 	biker_object.update(rightPressed, leftPressed);
 
@@ -75,20 +77,35 @@ function update() {
     }
     //console.log("length: " + objects.length);
     if (collision()){
-    	console.log("collision");
-    }
+    	if (collision() === 'biker') {
+    		console.log('end game');	
+    	}
+    	else {
+    		console.log('change path');
+    	}
 	draw();
 	score += 0.3
+	}
 }
 
 function collision(){
+
 	for (var i = 0; i < objects.length; i++){
 		var object1 = objects[i];
-		for(var j = i; j < objects.length; j++){
+		for(var j = i+1; j < objects.length; j++){
 			var object2 = objects[j];
-			if (object1.x_position + object1.width >= object2.x && object1.x_position < object2.x_position + object2.width &&
-				object1.y_position + object1.height >= object2.y_position && object1.y_position < object2.y_position + object2.height){
-				return true;
+
+			//console.log(objects[i].width, objects[j].width);
+			if (object1.x_position + object1.width >= object2.x_position 
+				&& object1.x_position < object2.x_position + object2.width 
+				&& object1.y_position + object1.height >= object2.y_position 
+				&& object1.y_position < object2.y_position + object2.height){
+				if (object1 == biker_object || object2 == biker_object) {
+					return 'biker';
+				}
+				else {
+					return 'not biker';
+				}
 			}
 		}
 	}
