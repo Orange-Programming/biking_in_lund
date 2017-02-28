@@ -56,6 +56,14 @@ function update() {
 	        objects.push(new Obstacle(c, x_position, y_position));
 	    }
 	}
+	if (frame_counter % 37 === 0){
+	    for (var i = 0; i < 1; i++){
+	        var x_position = Math.random()*(c.width-50);
+	        var y_position = c.height;
+	        x_position = Math.random()*(c.width-50);
+	        objects.push(new Walker(c, x_position, y_position))
+	    }
+	}
 
 	biker_object.update(rightPressed, leftPressed);
 
