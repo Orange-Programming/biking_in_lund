@@ -29,7 +29,7 @@ window.onload=function() {
 	setInterval(update, 1000/30);
 
 	function keyDownHandler(event) {
-		if(event.keyCode == 40) { 
+		if(event.keyCode == 40) {
 			upPressed = true;
 		}
 		if(event.keyCode == 39) {
@@ -38,7 +38,7 @@ window.onload=function() {
 		if(event.keyCode == 37) {
 			leftPressed = true;
 		}
-		if(event.keyCode == 38) { 
+		if(event.keyCode == 38) {
 			downPressed = true;
 		}
 	}
@@ -50,10 +50,10 @@ window.onload=function() {
 		if(event.keyCode == 37) {
 			leftPressed = false;
 		}
-		if(event.keyCode == 40) { 
+		if(event.keyCode == 40) {
 			upPressed = false;
 		}
-		if(event.keyCode == 38) { 
+		if(event.keyCode == 38) {
 			downPressed = false;
 		}
 	}
@@ -114,6 +114,7 @@ function update() {
 
 }
 
+// treats objects as perfect rectangles
 function collision(){
 
 	for (var i = 0; i < objects.length; i++){
@@ -122,9 +123,9 @@ function collision(){
 			var object2 = objects[j];
 
 			//console.log(objects[i].width, objects[j].width);
-			if (object1.x_position + object1.width >= object2.x_position 
-				&& object1.x_position < object2.x_position + object2.width 
-				&& object1.y_position + object1.height >= object2.y_position 
+			if (object1.x_position + object1.width >= object2.x_position
+				&& object1.x_position < object2.x_position + object2.width
+				&& object1.y_position + object1.height >= object2.y_position
 				&& object1.y_position < object2.y_position + object2.height){
 				if (object1 == biker_object || object2 == biker_object) {
 					return 'biker';

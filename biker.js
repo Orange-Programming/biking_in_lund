@@ -3,6 +3,7 @@ function Biker(canvas) {
 	this.canvas = canvas;
 	this.canvas_context = canvas.getContext('2d');
 
+	// position is not center, but corner
 	this.x_position = canvas.width / 2;
 	this.y_position = canvas.height / 6;
 
@@ -11,7 +12,7 @@ function Biker(canvas) {
 
 	this.movement = 5;
 
-	this.boundary_margin = 20;
+	this.boundary_margin = 32;
 
 	this.is_alive = true;
 
@@ -33,9 +34,9 @@ Biker.prototype.update = function(rightPressed, leftPressed,downPressed,upPresse
 	}
 
 	else { // compatible movements
-		if (downPressed && this.downBoundaryCheck()) { // accelerate 
+		if (downPressed && this.downBoundaryCheck()) { // accelerate
 			 	this.y_position += this.movement;
-		} 
+		}
 		if (rightPressed && this.rightBoundaryCheck()) { // can also move right
 			this.x_position += this.movement;
 		}
@@ -43,7 +44,7 @@ Biker.prototype.update = function(rightPressed, leftPressed,downPressed,upPresse
 			this.x_position -= this.movement;
 		}
 		// if both left and right, biker doesn't move in x-direction
-	} 
+	}
 
 	this.sprite.update();
 }
@@ -51,28 +52,28 @@ Biker.prototype.update = function(rightPressed, leftPressed,downPressed,upPresse
 
 Biker.prototype.draw = function() {
 	if (this.is_alive) {
-		this.sprite.render(this.x_position, this.y_position);		
+		this.sprite.render(this.x_position, this.y_position);
 	}
 }
 
 // returns true if illegal position
 Biker.prototype.leftBoundaryCheck = function() {
-	if (biker_object.x_position > 0 + boundary_margin){
+	if (this.x_position + this.width/2 > (0 + boundary_margin)){
 		return true;
 	} return false;
 }
 Biker.prototype.rightBoundaryCheck = function() {
-	if (biker_object.x_position < this.canvas.width - boundary_margin){
+	if (this.x_position + this.width/2 < this.canvas.width - boundary_margin){
 		return true;
 	} return false;
 }
 Biker.prototype.upBoundaryCheck = function() {
-	if (biker_object.y_position > 0 + boundary_margin){
+	if (this.y_position + this.height/2 > 0 + boundary_margin){
 		return true;
 	} return false;
 }
 Biker.prototype.downBoundaryCheck = function() {
-	if (biker_object.y_position < this.canvas.height - boundary_margin){
+	if (this.y_position + this.height/2 < this.canvas.height - boundary_margin){
 		return true;
 	} return false;
 }
@@ -109,8 +110,9 @@ function Walker(canvas, x_position, y_position){
 	this.width = 15;
 	this.height = 30;
 
-	this.x_position = x_position;
-	this.y_position = y_position;
+	// position is not center, but corner
+	this.x_position = x_position; // right side of object
+	this.y_position = y_position; // top side of object
 	this.x_start = x_position;
 	this.limit = 40;
 	this.direction = 1;
@@ -134,6 +136,3 @@ Walker.prototype.update = function() {
     }
     this.x_position -= this.direction * this.walk_step;
 }
-
-
-
