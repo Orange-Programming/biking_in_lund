@@ -14,7 +14,7 @@ var score = 0;
 var frame_counter = 0;
 
 var boundary_margin = 20;
-
+var background_speed = 10;
 
 window.onload=function() {
 	c = document.getElementById('gc');
