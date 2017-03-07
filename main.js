@@ -81,10 +81,8 @@ function update() {
 	    }
 	}
 
-
 	biker_object.update(rightPressed, leftPressed, upPressed, downPressed);
-
-
+	background.updateLevel(objects);
 
 	for (var i = 0; i < objects.length; i++){
 		//console.log("i: " + i);
