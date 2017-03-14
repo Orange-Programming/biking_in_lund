@@ -1,15 +1,22 @@
 
-function get_level_elements(level) {
+function get_level_elements(level, getobject) {
 
   var layer1;
   var level_data;
 
+  if (getobject === true) {
+    object_layer = 1;
+  }
+  else {
+    object_layer = 0;
+  }
+
   if (level == "level1") {
-    layer1 = TileMaps.test_level.layers[0];
+    layer1 = TileMaps.test_level.layers[object_layer];
   }
   else if (level == "level2") {
     // This will be changed to something else
-    layer1 = TileMaps.full_tile_level.layers[0];
+    layer1 = TileMaps.full_tile_level.layers[object_layer];
   }
   else {
     throw "Element " + level + " not implemented";
