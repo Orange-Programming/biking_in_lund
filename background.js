@@ -18,6 +18,15 @@ var background = (function background() {
 		console.log("Level loaded!");
 		time_image = new Image();
 		time_image.src = tileset;
+	}
+
+	function updateLevel(game_objects) {
+
+		var current_level_values = [];
+
+		// var current_target_y = (y * tile_size - y_shift);
+
+
 
 	}
 
@@ -39,7 +48,6 @@ var background = (function background() {
 				drawTile(canvas, x_pos, y_pos, tile_nbr);				
 			}
 		}
-
 	}
 
 	function drawTile(canvas, x, y, tile_nbr) {
@@ -67,7 +75,8 @@ var background = (function background() {
 
 	return {
 		loadLevel: loadLevel,
-		drawLevel: drawLevel
+		drawLevel: drawLevel,
+		updateLevel: updateLevel
 	}
 
 }());
