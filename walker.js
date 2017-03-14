@@ -16,7 +16,7 @@ function Walker(canvas, x_position, y_position){
 	this.walk_step = 3;
 
 	this.image = new Image();
-    this.image.src = "Guy2_walk - rescaled.xcf";
+    //this.image.src = "Guy2_walk - rescaled.xcf";
 
     this.sprite = sprite(this.canvas_context, this.width, this.height, this.image, 1, false);
 }
