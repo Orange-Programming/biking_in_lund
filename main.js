@@ -98,7 +98,7 @@ function update() {
     }
     //console.log("length: " + objects.length);
     var check_collision = collision();
-    if (check_collision == true){
+    if (check_collision){
     	if (check_collision === 'biker') {
     		//console.log('end game');
     		//alert('you lost')
