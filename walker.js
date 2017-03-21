@@ -2,8 +2,8 @@ function Walker(canvas, x_position, y_position){
 	this.canvas = canvas;
 	this.canvas_context = canvas.getContext("2d");
 
-	this.width = 15;
-	this.height = 30;
+	this.width = 64;
+	this.height = 64;
 
 	// position is not center, but corner
 	this.x_position = x_position; // right side of object
@@ -12,20 +12,17 @@ function Walker(canvas, x_position, y_position){
 	this.limit = 40;
 	this.direction = 1;
 
-	this.movement = 5;
+	this.movement = 10;
 	this.walk_step = 3;
 
 	this.image = new Image();
-    //this.image.src = "Guy2_walk - rescaled.xcf";
+    this.image.src = "static/img/guy1_walkx4.png";
 
-    this.sprite = sprite(this.canvas_context, this.width, this.height, this.image, 1, false);
+    this.sprite = sprite(this.canvas_context, this.width*2 , this.height, this.image, 2, true);
 }
 
 Walker.prototype.draw = function() {
-    this.canvas_context.fillStyle = 'orange';
-    this.canvas_context.fillRect(this.x_position,
-        this.y_position, this.width, this.height);
-    //this.sprite.render(this.x_position, this.y_position);
+	this.sprite.render(this.x_position, this.y_position);
 }
 
 Walker.prototype.update = function() {
@@ -36,4 +33,5 @@ Walker.prototype.update = function() {
     	this.direction = -this.direction;
     }
     this.x_position -= this.direction * this.walk_step;
+    this.sprite.update();
 }
