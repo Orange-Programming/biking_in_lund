@@ -8,6 +8,7 @@ var rightPressed = false;
 var leftPressed = false;
 var upPressed = false;
 var downPressed = false;
+var restart = false;
 
 var score = 0;
 
@@ -42,6 +43,9 @@ window.onload=function() {
 		if(event.keyCode == 38) {
 			downPressed = true;
 		}
+		if(event.keyCode == 88) {
+			restart = true;
+		}
 	}
 
 	function keyUpHandler(event) {
@@ -56,6 +60,9 @@ window.onload=function() {
 		}
 		if(event.keyCode == 38) {
 			downPressed = false;
+		}
+		if(event.keyCode == 88) {
+			restart = false;
 		}
 	}
 
@@ -105,6 +112,11 @@ function update() {
 		cc.fillStyle = "yellow";
 		cc.fillText('GAME OVER!', 200, 250);
 		cc.fillText('SCORE: ' + Math.floor(score), 230, 400);
+		cc.font = "35px BadaBoom BB";
+		cc.fillText('PRESS X TO START OVER', 280, 550);
+		if (restart) {
+			// REINITIALIZE EVERYTHING TO START OVER
+		}
 
 	}
 	else {
