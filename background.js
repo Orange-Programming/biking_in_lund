@@ -79,8 +79,8 @@ var background = (function background() {
 
 	function drawTile(canvas, x, y, tile_nbr) {
 
-		if (!loop_level) {
-			var current_target_y = (y * tile_size - y_shift);
+		var current_target_y = (y * tile_size - y_shift);
+		if (loop_level) {
 			while (current_target_y < -tile_size) {
 				current_target_y += tot_height;
 			}
