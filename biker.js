@@ -10,7 +10,7 @@ function Biker(canvas) {
 	this.width = 64;
 	this.height = 64;
 
-	this.movement = 5;
+	this.movement = background_speed;
 
 	this.boundary_margin = 32;
 
@@ -23,6 +23,7 @@ function Biker(canvas) {
 }
 
 Biker.prototype.is_hit = function() {
+	sound.play('crash');
 	this.is_alive = false;
 }
 
@@ -78,61 +79,5 @@ Biker.prototype.downBoundaryCheck = function() {
 	} return false;
 }
 
-function Obstacle(canvas, x_position, y_position){
-    this.canvas = canvas;
-    this.canvas_context = canvas.getContext('2d');
 
-    this.width = 50;
-    this.height = 50;
 
-    this.x_position = x_position;
-    this.y_position = y_position;
-
-    this.movement = 5;
-}
-
-Obstacle.prototype.draw = function() {
-    this.canvas_context.fillStyle = 'green';
-    this.canvas_context.fillRect(this.x_position,
-        this.y_position, this.width, this.height);
-}
-
-Obstacle.prototype.update = function() {
-
-    this.y_position-=this.movement
-
-}
-
-function Walker(canvas, x_position, y_position){
-	this.canvas = canvas;
-	this.canvas_context = canvas.getContext("2d");
-
-	this.width = 15;
-	this.height = 30;
-
-	// position is not center, but corner
-	this.x_position = x_position; // right side of object
-	this.y_position = y_position; // top side of object
-	this.x_start = x_position;
-	this.limit = 40;
-	this.direction = 1;
-
-	this.movement = 5;
-	this.walk_step = 3;
-}
-
-Walker.prototype.draw = function() {
-    this.canvas_context.fillStyle = 'orange';
-    this.canvas_context.fillRect(this.x_position,
-        this.y_position, this.width, this.height);
-}
-
-Walker.prototype.update = function() {
-
-    this.y_position -= this.movement;
-
-    if(this.x_position > this.x_start + this.limit || this.x_position < this.x_start - this.limit) {
-    	this.direction = -this.direction;
-    }
-    this.x_position -= this.direction * this.walk_step;
-}

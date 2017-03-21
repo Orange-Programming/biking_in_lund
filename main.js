@@ -14,13 +14,13 @@ var score = 0;
 var frame_counter = 0;
 
 var boundary_margin = 20;
-
+var background_speed = 10;
 
 window.onload=function() {
 	c = document.getElementById('gc');
 	cc = c.getContext('2d');
 
-	background.loadLevel("level2", cc);
+	background.loadLevel("level2", objects);
 
 	biker_object = new Biker(c);
 	objects.push(biker_object);
@@ -69,7 +69,7 @@ function update() {
 		for (var i = 0; i < 1; i++){
 	       var x_position = Math.random()*(c.width-50);
 	       var y_position = c.height;
-	       objects.push(new Obstacle(c, x_position, y_position));
+	    //   objects.push(new Obstacle(c, x_position, y_position));
 	   }
 	}
 	if (frame_counter % 37 === 0){
@@ -77,7 +77,7 @@ function update() {
 	        var x_position = Math.random()*(c.width-50);
 	        var y_position = c.height;
 	        x_position = Math.random()*(c.width-50);
-	        objects.push(new Walker(c, x_position, y_position))
+	     //   objects.push(new Walker(c, x_position, y_position))
 	    }
 	}
 
@@ -97,8 +97,9 @@ function update() {
 
     }
     //console.log("length: " + objects.length);
-    if (collision()){
-    	if (collision() === 'biker') {
+    var check_collision = collision();
+    if (check_collision){
+    	if (check_collision === 'biker') {
     		//console.log('end game');
     		//alert('you lost')
     		biker_object.is_hit();

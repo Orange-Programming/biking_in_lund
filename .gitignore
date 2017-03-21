@@ -2,3 +2,4 @@
 non_tracked_stuff/
 
 # Files
+*/.DS_Store
