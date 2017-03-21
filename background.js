@@ -13,6 +13,7 @@ var background = (function background() {
 	var tileset = "static/img/tileset.png";
 	var tile_image;
 
+	var loop_level = false;
 
 
 	function loadLevel(level, game_objects) {
@@ -78,9 +79,11 @@ var background = (function background() {
 
 	function drawTile(canvas, x, y, tile_nbr) {
 
-		var current_target_y = (y * tile_size - y_shift);
-		while (current_target_y < -tile_size) {
-			current_target_y += tot_height;
+		if (!loop_level) {
+			var current_target_y = (y * tile_size - y_shift);
+			while (current_target_y < -tile_size) {
+				current_target_y += tot_height;
+			}
 		}
 
 		var tile_pos = getTilePosition(tile_nbr - 1);
