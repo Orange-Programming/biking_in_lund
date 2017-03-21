@@ -69,7 +69,7 @@ function update() {
 		for (var i = 0; i < 1; i++){
 	       var x_position = Math.random()*(c.width-50);
 	       var y_position = c.height;
-	    //   objects.push(new Obstacle(c, x_position, y_position));
+	    //   objects.push(new Tree(c, x_position, y_position));
 	   }
 	}
 	if (frame_counter % 37 === 0){

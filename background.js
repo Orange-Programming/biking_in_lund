@@ -20,15 +20,6 @@ var background = (function background() {
 		level_data = get_level_elements(level, false);
 		object_data = get_level_elements(level, true);
 		console.log("Level loaded!");
-		//console.log(level_data.length);
-		//console.log(object_data.length);
-
-		/**for (var i = 0; i < 10; i++) {
-			var curr_obj = object_data[i];
-			var level_obj = level_data[i];
-				console.log(curr_obj);
-				console.log(level_obj);
-		}*/
 		
 		time_image = new Image();
 		time_image.src = tileset;
@@ -38,10 +29,21 @@ var background = (function background() {
 
 	function createObstacleObjects(game_objects, object_data) {
 		for(var i = 0; i < object_data.length; i++) {
-			if (object_data[i].value == 28){
-			var x_position = object_data[i].x * 32;
-	        var y_position = object_data[i].y * 32;
-	        objects.push(new Obstacle(c, x_position, y_position));
+
+			if (object_data[i].value !== 0) {
+				console.log(object_data[i].value);
+			}
+
+			if (object_data[i].value === 73) {
+				console.log(object_data[i].value);
+				var x_position = object_data[i].x * 32;
+	        	var y_position = object_data[i].y * 32;
+	        	objects.push(new Tree(c, x_position, y_position));
+			}
+			else if (object_data[i].value === 74) {
+				var x_position = object_data[i].x * 32;
+	        	var y_position = object_data[i].y * 32;
+	        	objects.push(new Walker(c, x_position, y_position));				
 			}
 		}
 	}
