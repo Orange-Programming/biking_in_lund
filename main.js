@@ -66,21 +66,8 @@ window.onload=function() {
 function update() {
 
 	frame_counter++;
-	if (frame_counter % 30 === 0){
-		for (var i = 0; i < 1; i++){
-	       var x_position = Math.random()*(c.width-50);
-	       var y_position = c.height;
-	    //   objects.push(new Obstacle(c, x_position, y_position));
-	   }
-	}
-	if (frame_counter % 37 === 0){
-	    for (var i = 0; i < 1; i++){
-	        var x_position = Math.random()*(c.width-50);
-	        var y_position = c.height;
-	        x_position = Math.random()*(c.width-50);
-	     //   objects.push(new Walker(c, x_position, y_position))
-	    }
-	}
+
+	// updateRandomSpawn(frame_counter);
 
 	biker_object.update(rightPressed, leftPressed, upPressed, downPressed);
 	background.updateLevel(objects);
@@ -124,6 +111,25 @@ function update() {
 		score += 0.3;
 	}
 
+}
+
+
+function updateRandomSpawn(frame_counter) {
+		if (frame_counter % 30 === 0){
+		for (var i = 0; i < 1; i++){
+	       var x_position = Math.random()*(c.width-50);
+	       var y_position = c.height;
+	       objects.push(new Tree(c, x_position, y_position));
+	   }
+	}
+	if (frame_counter % 37 === 0){
+	    for (var i = 0; i < 1; i++){
+	        var x_position = Math.random()*(c.width-50);
+	        var y_position = c.height;
+	        x_position = Math.random()*(c.width-50);
+	        objects.push(new Walker(c, x_position, y_position))
+	    }
+	}
 }
 
 // treats objects as perfect rectangles
