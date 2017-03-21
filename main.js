@@ -97,8 +97,9 @@ function update() {
 
     }
     //console.log("length: " + objects.length);
-    if (collision()){
-    	if (collision() === 'biker') {
+    var check_collision = collision();
+    if (check_collision == true){
+    	if (check_collision === 'biker') {
     		//console.log('end game');
     		//alert('you lost')
     		biker_object.is_hit();
