@@ -23,6 +23,7 @@ function Biker(canvas) {
 }
 
 Biker.prototype.is_hit = function() {
+	sound.play('crash');
 	this.is_alive = false;
 }
 
