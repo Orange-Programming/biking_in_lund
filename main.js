@@ -16,6 +16,7 @@ var frame_counter = 0;
 var boundary_margin = 20;
 var background_speed = 10;
 
+
 window.onload=function() {
 	c = document.getElementById('gc');
 	cc = c.getContext('2d');
@@ -108,8 +109,20 @@ function update() {
     		console.log('change path');
     	}
 	}
+
 	draw();
-	score += 0.3
+
+
+	if (biker_object.is_alive == false) {
+		cc.font = "100px BadaBoom BB";
+		cc.fillStyle = "yellow";
+		cc.fillText('GAME OVER!', 200, 250);
+		cc.fillText('SCORE: ' + Math.floor(score), 230, 400);
+
+	}
+	else {
+		score += 0.3;
+	}
 
 }
 
@@ -151,7 +164,7 @@ function draw() {
 
 
 function drawScore() {
-	cc.font = "22px Arial";
+	cc.font = "32px BadaBoom BB";
 	cc.fillStyle = "yellow";
 	cc.fillText('SCORE: ' + Math.floor(score), c.width-200, 50);
 }
