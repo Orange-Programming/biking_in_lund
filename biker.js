@@ -7,7 +7,7 @@ function Biker(canvas) {
 	this.x_position = canvas.width / 2;
 	this.y_position = canvas.height / 6;
 
-	this.width = 64;
+	this.width = 40;
 	this.height = 64;
 
 	this.movement = background_speed;
@@ -19,7 +19,7 @@ function Biker(canvas) {
 	this.image = new Image();
 	this.image.src = "static/img/biker_large.png";
 
-	this.sprite = sprite(this.canvas_context, 256, 64, this.image, 4, true);
+	this.sprite = sprite(this.canvas_context, 160, 64, this.image, 4, true);
 }
 
 Biker.prototype.is_hit = function() {

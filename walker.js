@@ -2,8 +2,8 @@ function Walker(canvas, x_position, y_position){
 	this.canvas = canvas;
 	this.canvas_context = canvas.getContext("2d");
 
-	this.width = 64;
-	this.height = 64;
+	this.width = 20;
+	this.height = 56;
 
 	// position is not center, but corner
 	this.x_position = x_position; // right side of object
