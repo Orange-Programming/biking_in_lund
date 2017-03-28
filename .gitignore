@@ -3,4 +3,4 @@ non_tracked_stuff/
 .idea/
 
 # Files
-*/.DS_Store
+**/.DS_Store
