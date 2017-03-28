@@ -112,11 +112,11 @@ function update() {
 
 
 	if (biker_object.is_alive == false) {
-		cc.font = "100px BadaBoom BB";
+		cc.font = "100px BadaBoom-BB";
 		cc.fillStyle = "yellow";
 		cc.fillText('GAME OVER!', 200, 250);
 		cc.fillText('SCORE: ' + Math.floor(score), 230, 400);
-		cc.font = "35px BadaBoom BB";
+		cc.font = "35px BadaBoom-BB";
 		cc.fillText('PRESS X TO START OVER', 280, 550);
 		if (restart) {
 			// REINITIALIZE EVERYTHING TO START OVER
@@ -186,7 +186,7 @@ function draw() {
 
 
 function drawScore() {
-	cc.font = "32px BadaBoom BB";
+	cc.font = "32px BadaBoom-BB";
 	cc.fillStyle = "yellow";
 	cc.fillText('SCORE: ' + Math.floor(score), c.width-200, 50);
 }
