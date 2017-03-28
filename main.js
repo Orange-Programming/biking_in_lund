@@ -84,47 +84,24 @@ function initialize_game() {
 
 function update() {
 
-	frame_counter++;
+	if (background.levelFinished() == false) {
+		frame_counter++;
+		biker_object.update(rightPressed, leftPressed, upPressed, downPressed);
+		background.updateLevel(objects);
+		objects_update();
 
-	biker_object.update(rightPressed, leftPressed, upPressed, downPressed);
-	background.updateLevel(objects);
-
-	for (var i = 0; i < objects.length; i++){
-		var current_object = objects[i];
-		if (current_object !== biker_object){
-			current_object.update();
-			if (current_object.y_position < 0 - current_object.diameter){
-				objects.splice(i, 1);
-				i--;
-			}
+		if (biker_object.is_alive) {
+			check_biker_in_collision();
+			score += 0.3;
 		}
-
-    }
-
-    var check_collision = collision();
-    if (check_collision){
-    	if (check_collision === 'biker') {
-    		biker_object.is_hit();
-    	}
+		draw();
 	}
-
-	draw();
-
+	else if (biker_object.is_alive) {
+		drawWin();
+	}
 
 	if (biker_object.is_alive == false) {
-		cc.font = "100px BadaBoom-BB";
-		cc.fillStyle = "yellow";
-		cc.fillText('GAME OVER!', 200, 250);
-		cc.fillText('SCORE: ' + Math.floor(score), 230, 400);
-		cc.font = "35px BadaBoom-BB";
-		cc.fillText('PRESS X TO START OVER', 280, 550);
-		if (restart) {
-			// REINITIALIZE EVERYTHING TO START OVER
-		}
-
-	}
-	else {
-		score += 0.3;
+		drawGameOver();
 	}
 
 }
@@ -146,6 +123,20 @@ function updateRandomSpawn(frame_counter) {
 	        objects.push(new Walker(c, x_position, y_position))
 	    }
 	}
+}
+
+function objects_update() {
+	for (var i = 0; i < objects.length; i++){
+		var current_object = objects[i];
+		if (current_object !== biker_object){
+			current_object.update();
+			if (current_object.y_position < 0 - current_object.diameter){
+				objects.splice(i, 1);
+				i--;
+			}
+		}
+
+    }
 }
 
 // treats objects as perfect rectangles
@@ -173,6 +164,15 @@ function collision(){
 	return false;
 }
 
+function check_biker_in_collision() {
+	var check_collision = collision();
+    if (check_collision){
+    	if (check_collision === 'biker') {
+    		biker_object.is_hit();
+    	}
+	}
+}
+
 function draw() {
 	cc.fillStyle = 'black';
     background.drawLevel(cc);
@@ -189,4 +189,23 @@ function drawScore() {
 	cc.font = "32px BadaBoom-BB";
 	cc.fillStyle = "yellow";
 	cc.fillText('SCORE: ' + Math.floor(score), c.width-200, 50);
+}
+
+function drawGameOver() {
+	cc.font = "100px BadaBoom-BB";
+	cc.fillStyle = "yellow";
+	cc.fillText('GAME OVER!', 200, 250);
+	cc.fillText('SCORE: ' + Math.floor(score), 230, 400);
+	cc.font = "35px BadaBoom-BB";
+	cc.fillText('PRESS X TO START OVER', 280, 550);
+}
+
+function drawWin() {
+	cc.font = "100px BadaBoom-BB";
+	cc.fillStyle = "yellow";
+	cc.fillText('CONGRATULATIONS!', 100, 220);
+	cc.fillText('YOU WIN', 270, 320)
+	cc.fillText('SCORE: ' + Math.floor(score), 230, 430);
+	cc.font = "35px BadaBoom-BB";
+	//cc.fillText('PRESS X TO START OVER', 280, 550);
 }

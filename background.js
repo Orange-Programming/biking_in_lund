@@ -4,7 +4,7 @@ var background = (function background() {
 	var tile_cols = 6;
 
 	var y_shift;
-	var tot_height = 2560;  // TODO: Generalize
+	var tot_height = 160*tile_size;  // TODO: Generalize
 	var scroll_speed = 10;
 
 	var level_data;
@@ -104,10 +104,18 @@ var background = (function background() {
 		return(pos);
 	}
 
+	function levelFinished() {
+		if (y_shift >= tot_height-600) {
+			return true;
+		}
+		return false;
+	}
+
 	return {
 		loadLevel: loadLevel,
 		drawLevel: drawLevel,
-		updateLevel: updateLevel
+		updateLevel: updateLevel,
+		levelFinished: levelFinished
 	}
 
 }());
