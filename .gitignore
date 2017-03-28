@@ -1,5 +1,6 @@
 # Directories
 non_tracked_stuff/
+.idea/
 
 # Files
 */.DS_Store

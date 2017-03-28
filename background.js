@@ -3,7 +3,7 @@ var background = (function background() {
 	var tile_size = 32;
 	var tile_cols = 6;
 
-	var y_shift = 0;
+	var y_shift;
 	var tot_height = 2560;  // TODO: Generalize
 	var scroll_speed = 10;
 
@@ -17,6 +17,8 @@ var background = (function background() {
 
 
 	function loadLevel(level, game_objects) {
+
+		y_shift = 0;
 
 		level_data = get_level_elements(level, false);
 		object_data = get_level_elements(level, true);

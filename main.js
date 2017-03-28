@@ -2,7 +2,6 @@ var cc;
 var c;
 
 var biker_object;
-var objects = [];
 
 var rightPressed = false;
 var leftPressed = false;
@@ -10,77 +9,87 @@ var upPressed = false;
 var downPressed = false;
 var restart = false;
 
-var score = 0;
+var objects;
+var score;
+var frame_counter;
+var boundary_margin;
+var background_speed;
 
-var frame_counter = 0;
 
-var boundary_margin = 20;
-var background_speed = 10;
+window.onload = function() {
 
-
-window.onload=function() {
 	c = document.getElementById('gc');
 	cc = c.getContext('2d');
 
-	background.loadLevel("level2", objects);
-
-	biker_object = new Biker(c);
-	objects.push(biker_object);
-	//objects.push(new Obstacle(c, 300, 300));
+	add_key_listeners();
+	initialize_game();
 
 	setInterval(update, 1000/30);
+};
 
-	function keyDownHandler(event) {
-		if(event.keyCode == 40) {
-			upPressed = true;
-		}
-		if(event.keyCode == 39) {
-			rightPressed = true;
-		}
-		if(event.keyCode == 37) {
-			leftPressed = true;
-		}
-		if(event.keyCode == 38) {
-			downPressed = true;
-		}
-		if(event.keyCode == 88) {
-			restart = true;
-		}
-	}
 
-	function keyUpHandler(event) {
-		if(event.keyCode == 39) {
-			rightPressed = false;
-		}
-		if(event.keyCode == 37) {
-			leftPressed = false;
-		}
-		if(event.keyCode == 40) {
-			upPressed = false;
-		}
-		if(event.keyCode == 38) {
-			downPressed = false;
-		}
-		if(event.keyCode == 88) {
-			restart = false;
-		}
-	}
+function add_key_listeners() {
+    function keyDownHandler(event) {
+        if(event.keyCode == 40) {
+            upPressed = true;
+        }
+        if(event.keyCode == 39) {
+            rightPressed = true;
+        }
+        if(event.keyCode == 37) {
+            leftPressed = true;
+        }
+        if(event.keyCode == 38) {
+            downPressed = true;
+        }
+        if(event.keyCode == 88) {
+            initialize_game();
+        }
+    }
 
-	document.addEventListener("keydown", keyDownHandler, false);
-	document.addEventListener("keyup", keyUpHandler, false);
+    function keyUpHandler(event) {
+        if(event.keyCode == 39) {
+            rightPressed = false;
+        }
+        if(event.keyCode == 37) {
+            leftPressed = false;
+        }
+        if(event.keyCode == 40) {
+            upPressed = false;
+        }
+        if(event.keyCode == 38) {
+            downPressed = false;
+        }
+    }
+
+    document.addEventListener("keydown", keyDownHandler, false);
+    document.addEventListener("keyup", keyUpHandler, false);
 }
+
+
+function initialize_game() {
+    score = 0;
+    frame_counter = 0;
+    boundary_margin = 20;
+    background_speed = 10;
+    objects = [];
+
+    background.loadLevel("level2", objects);
+
+    biker_object = new Biker(c);
+    objects.push(biker_object);
+}
+
+
 
 function update() {
 
 	frame_counter++;
 
-	// updateRandomSpawn(frame_counter);
-
 	biker_object.update(rightPressed, leftPressed, upPressed, downPressed);
 	background.updateLevel(objects);
 
 	for (var i = 0; i < objects.length; i++){
-		//console.log("i: " + i);
 		var current_object = objects[i];
 		if (current_object !== biker_object){
 			current_object.update();
@@ -91,12 +100,10 @@ function update() {
 		}
 
     }
-    //console.log("length: " + objects.length);
+
     var check_collision = collision();
     if (check_collision){
     	if (check_collision === 'biker') {
-    		//console.log('end game');
-    		//alert('you lost')
     		biker_object.is_hit();
     	}
     	else {
