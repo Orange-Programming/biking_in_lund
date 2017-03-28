@@ -106,9 +106,6 @@ function update() {
     	if (check_collision === 'biker') {
     		biker_object.is_hit();
     	}
-    	else {
-    		console.log('change path');
-    	}
 	}
 
 	draw();
