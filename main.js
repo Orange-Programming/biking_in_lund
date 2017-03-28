@@ -82,10 +82,10 @@ function initialize_game() {
 	}
     console.log(people_creation_speed);
 
-    background.loadLevel("level2", objects);
-
     biker_object = new Biker(c);
     objects.push(biker_object);
+
+    background.loadLevel("level2", objects);
 }
 
 
