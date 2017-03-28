@@ -99,9 +99,6 @@ function update() {
     		//alert('you lost')
     		biker_object.is_hit();
     	}
-    	else {
-    		console.log('change path');
-    	}
 	}
 
 	draw();
