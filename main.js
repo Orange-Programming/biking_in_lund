@@ -15,6 +15,9 @@ var frame_counter;
 var boundary_margin;
 var background_speed;
 
+var default_people_creation_speed = 38;
+var people_creation_speed = default_people_creation_speed;
+
 
 window.onload = function() {
 
@@ -73,6 +76,11 @@ function initialize_game() {
     boundary_margin = 20;
     background_speed = 10;
     objects = [];
+    people_creation_speed = parseInt(people_creation_speed / 2);
+    if (people_creation_speed < 1) {
+    	people_creation_speed = 1;
+	}
+    console.log(people_creation_speed);
 
     background.loadLevel("level2", objects);
 
@@ -84,8 +92,10 @@ function initialize_game() {
 
 function update() {
 
+
 	if (background.levelFinished() == false) {
 		frame_counter++;
+		updateRandomPersonSpawn(frame_counter);
 		biker_object.update(rightPressed, leftPressed, upPressed, downPressed);
 		background.updateLevel(objects);
 		objects_update();
@@ -107,23 +117,17 @@ function update() {
 }
 
 
-function updateRandomSpawn(frame_counter) {
-		if (frame_counter % 30 === 0){
-		for (var i = 0; i < 1; i++){
-	       var x_position = Math.random()*(c.width-50);
-	       var y_position = c.height;
-	       objects.push(new Tree(c, x_position, y_position));
-	   }
-	}
-	if (frame_counter % 37 === 0){
-	    for (var i = 0; i < 1; i++){
-	        var x_position = Math.random()*(c.width-50);
-	        var y_position = c.height;
-	        x_position = Math.random()*(c.width-50);
-	        objects.push(new Walker(c, x_position, y_position))
-	    }
-	}
+function updateRandomPersonSpawn(frame_counter) {
+    if (frame_counter % people_creation_speed === 0){
+        for (var i = 0; i < 1; i++){
+            var x_position = Math.random()*(c.width-50);
+            var y_position = c.height;
+            x_position = Math.random()*(c.width-50);
+            objects.push(new Walker(c, x_position, y_position))
+        }
+    }
 }
+
 
 function objects_update() {
 	for (var i = 0; i < objects.length; i++){
@@ -138,6 +142,19 @@ function objects_update() {
 
     }
 }
+
+
+
+function updateRandomTreeSpawn(frame_counter) {
+    if (frame_counter % 30 === 0){
+        for (var i = 0; i < 1; i++){
+            var x_position = Math.random()*(c.width-50);
+            var y_position = c.height;
+            objects.push(new Tree(c, x_position, y_position));
+        }
+    }
+}
+
 
 // treats objects as perfect rectangles
 function collision(){

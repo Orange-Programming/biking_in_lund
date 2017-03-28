@@ -5,8 +5,10 @@ function sprite(context, width, height, image, numberOfFrames, loop) {
 	that.context = context;
 	that.width = width;
 	that.height = height;
+	that.source = image.src;
 	that.image = image;
 	that.loop = loop;
+	that.flipped = false;
 
 	var frameIndex = 0;
 	var tickCount = 0;
@@ -39,6 +41,18 @@ function sprite(context, width, height, image, numberOfFrames, loop) {
 			}
 		}
 	};
+
+	that.flip = function(){
+		//Switch image from source.png to source_flip.png and back
+		if (this.flipped) {
+			this.image.src = this.source;
+			this.flipped = false;
+		} else {
+			var index = this.source.indexOf('.png');
+			this.image.src = this.source.slice(0, index) + '_flip.png';
+			this.flipped = true;
+		}
+	}
 
 	return that;
 }

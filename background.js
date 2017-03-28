@@ -42,11 +42,11 @@ var background = (function background() {
 	        	var y_position = object_data[i].y * tile_size;
 	        	objects.push(new Tree(c, x_position, y_position));
 			}
-			else if (object_data[i].value === 74) {
-				var x_position = object_data[i].x * tile_size;
-	        	var y_position = object_data[i].y * tile_size;
-	        	objects.push(new Walker(c, x_position, y_position));				
-			}
+			// else if (object_data[i].value === 74) {
+			// 	var x_position = object_data[i].x * tile_size;
+	        	// var y_position = object_data[i].y * tile_size;
+	        	// objects.push(new Walker(c, x_position, y_position));
+			// }
 		}
 	}
 
