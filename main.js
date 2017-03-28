@@ -77,6 +77,9 @@ function initialize_game() {
     background_speed = 10;
     objects = [];
     people_creation_speed = parseInt(people_creation_speed / 2);
+    if (people_creation_speed < 1) {
+    	people_creation_speed = 1;
+	}
     console.log(people_creation_speed);
 
     background.loadLevel("level2", objects);
