@@ -10,7 +10,10 @@ function Walker(canvas, x_position, y_position){
 	this.y_position = y_position; // top side of object
 	this.x_start = x_position;
 	this.limit = 40;
-	this.direction = 1;
+	this.direction = Math.floor(Math.random()*2)*2-1;
+
+	//random position
+	this.x_position += Math.floor(Math.random()*this.limit)*this.direction;
 
 	this.movement = 10;
 	this.walk_step = 3;
@@ -19,6 +22,9 @@ function Walker(canvas, x_position, y_position){
     this.image.src = "static/img/guy1_walkx4.png";
 
     this.sprite = sprite(this.canvas_context, this.width*2 , this.height, this.image, 2, true);
+    if (this.direction < 0) {
+	this.sprite.flip();
+    }
 }
 
 Walker.prototype.draw = function() {
@@ -31,6 +37,7 @@ Walker.prototype.update = function() {
 
     if(this.x_position > this.x_start + this.limit || this.x_position < this.x_start - this.limit) {
     	this.direction = -this.direction;
+	this.sprite.flip();
     }
     this.x_position -= this.direction * this.walk_step;
     this.sprite.update();
