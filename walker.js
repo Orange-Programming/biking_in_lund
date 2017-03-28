@@ -2,7 +2,7 @@ function Walker(canvas, x_position, y_position){
 	this.canvas = canvas;
 	this.canvas_context = canvas.getContext("2d");
 
-	this.width = 20;
+	this.width = 24;
 	this.height = 56;
 
 	// position is not center, but corner
@@ -18,8 +18,14 @@ function Walker(canvas, x_position, y_position){
 	this.movement = 10;
 	this.walk_step = 3;
 
+	var walkerSources = [
+	"static/img/guy1_walkx4.png",
+	"static/img/guy2_walkx4.png",
+	"static/img/guy3_walkx4.png"
+	];
+
 	this.image = new Image();
-    this.image.src = "static/img/guy1_walkx4.png";
+    this.image.src = walkerSources[Math.floor(Math.random()*walkerSources.length)];
 
     this.sprite = sprite(this.canvas_context, this.width*2 , this.height, this.image, 2, true);
     if (this.direction < 0) {
