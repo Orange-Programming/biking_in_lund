@@ -1,7 +1,8 @@
 var background = (function background() {
 
 	var tile_size = 32;
-	var tile_cols = 6;
+	var tile_cols_tileset = 6;
+	var tile_cols_level = 25;
 
 	var y_shift;
 	var tot_height = 160*tile_size;  // TODO: Generalize
@@ -95,8 +96,8 @@ var background = (function background() {
 
 	function getTilePosition(tile_nbr) {
 
-		var row = Math.floor(tile_nbr / tile_cols);
-		var col = tile_nbr % tile_cols;
+		var row = Math.floor(tile_nbr / tile_cols_tileset);
+		var col = tile_nbr % tile_cols_tileset;
 
 		var x = col * tile_size;
 		var y = row * tile_size;
@@ -111,11 +112,34 @@ var background = (function background() {
 		return false;
 	}
 
+	function isRoadAt(x_pixel, y_pixel) {
+		var x_tile = Math.ceil(x_pixel/32);
+        var y_tile = Math.ceil((y_pixel + y_shift)/32);
+
+		var index = arrayIndex(x_tile,y_tile,tile_cols_level);
+		console.log('index' + index)
+		var value = level_data[index].value;
+		console.log('value' + value);
+		return valueIsRoad(value);
+	}
+
+	function arrayIndex(x_tile, y_tile, cols){
+		var index = x_tile + Math.floor(y_tile/cols);
+		return index;
+	}
+
+	function valueIsRoad(value){
+		var roadValues = [3,4,5, 9,10,11, 15,16,17, 18,19,20,21,22,23, 24,25,26,27,28,29, 30,31,32];
+		var index = roadValues.indexOf(value); // -1 if missing
+		return index != -1;
+	}
+
 	return {
 		loadLevel: loadLevel,
 		drawLevel: drawLevel,
 		updateLevel: updateLevel,
-		levelFinished: levelFinished
+		levelFinished: levelFinished,
+		isRoadAt: isRoadAt
 	}
 
 }());

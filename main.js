@@ -88,10 +88,7 @@ function initialize_game() {
 }
 
 
-
 function update() {
-
-
 	if (background.levelFinished() == false) {
 		frame_counter++;
 		updateRandomPersonSpawn(frame_counter);
@@ -101,7 +98,15 @@ function update() {
 
 		if (biker_object.is_alive) {
 			check_biker_in_collision();
-			score += 0.3;
+
+			var x_center = biker_object.x_position - biker_object.width/2;
+            var y_center = biker_object.y_position - biker_object.height/2;
+
+            if (background.isRoadAt(x_center, y_center)){
+			    score += 1000;
+            } else {
+                score += 0.3;
+            }
 		}
 		draw();
 	}
