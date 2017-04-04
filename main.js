@@ -19,6 +19,9 @@ var default_people_creation_speed = 38;
 var people_creation_speed = default_people_creation_speed;
 
 
+var endOfLevel = false;
+
+
 window.onload = function() {
 
 	c = document.getElementById('gc');
@@ -75,6 +78,7 @@ function initialize_game() {
     frame_counter = 0;
     boundary_margin = 20;
     background_speed = 10;
+    upPressed = false;
     objects = [];
     people_creation_speed = parseInt(people_creation_speed / 2);
     if (people_creation_speed < 1) {
@@ -90,7 +94,7 @@ function initialize_game() {
 
 
 function update() {
-
+	endOfLevel = background.levelFinished();
 
 	if (background.levelFinished() == false) {
 		frame_counter++;
@@ -105,7 +109,13 @@ function update() {
 		}
 		draw();
 	}
-	else if (biker_object.is_alive) {
+
+	else if (biker_object.is_alive && biker_object.atFinishLine == false) {
+		upPressed = true;
+		biker_object.update(rightPressed, leftPressed, upPressed, downPressed, endOfLevel);
+		draw();
+	}
+	else if (biker_object.is_alive && biker_object.atFinishLine == true) {
 		drawWin();
 	}
 
