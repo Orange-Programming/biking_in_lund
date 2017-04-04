@@ -22,7 +22,7 @@ var background = (function background() {
 
 		level_data = get_level_elements(level, false);
 		object_data = get_level_elements(level, true);
-		console.log("Level loaded!");
+		//console.log("Level loaded!");
 		
 		time_image = new Image();
 		time_image.src = tileset;
@@ -37,7 +37,7 @@ var background = (function background() {
 			// debugPrintObstacleNumber(object_data[i].value);
 
 			if (object_data[i].value === 73) {
-				console.log(object_data[i].value);
+				//console.log(object_data[i].value);
 				var x_position = object_data[i].x * tile_size;
 	        	var y_position = object_data[i].y * tile_size;
 	        	objects.push(new Tree(c, x_position, y_position));

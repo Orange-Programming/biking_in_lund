@@ -94,7 +94,7 @@ function initialize_game() {
     if (people_creation_speed < 1) {
     	people_creation_speed = 1;
 	}
-    console.log(people_creation_speed);
+//    console.log(people_creation_speed);
 
     biker_object = new Biker(c);
 

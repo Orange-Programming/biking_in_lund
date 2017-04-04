@@ -50,7 +50,6 @@ Biker.prototype.update = function(rightPressed, leftPressed, downPressed, upPres
 	
 
 	if (endOfLevel && (this.downBoundaryCheck() == false)) {
-		console.log('now');
 		this.atFinishLine = true;
 	}
 
