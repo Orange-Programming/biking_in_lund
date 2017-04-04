@@ -83,7 +83,6 @@ function initialize_game() {
     console.log(people_creation_speed);
 
     biker_object = new Biker(c);
-    objects.push(biker_object);
 
     background.loadLevel("level2", objects);
 }
@@ -161,21 +160,12 @@ function collision(){
 
 	for (var i = 0; i < objects.length; i++){
 		var object1 = objects[i];
-		for(var j = i+1; j < objects.length; j++){
-			var object2 = objects[j];
-
-			//console.log(objects[i].width, objects[j].width);
-			if (object1.x_position + object1.width >= object2.x_position
-				&& object1.x_position < object2.x_position + object2.width
-				&& object1.y_position + object1.height >= object2.y_position
-				&& object1.y_position < object2.y_position + object2.height){
-				if (object1 == biker_object || object2 == biker_object) {
-					return 'biker';
-				}
-				else {
-					return 'not biker';
-				}
-			}
+	
+		if (object1.x_position + object1.width >= biker_object.x_position
+			&& object1.x_position < biker_object.x_position + biker_object.width
+			&& object1.y_position + object1.height >= biker_object.y_position
+			&& object1.y_position < biker_object.y_position + biker_object.height){
+            return 'biker'
 		}
 	}
 	return false;
@@ -184,9 +174,7 @@ function collision(){
 function check_biker_in_collision() {
 	var check_collision = collision();
     if (check_collision){
-    	if (check_collision === 'biker') {
-    		biker_object.is_hit();
-    	}
+    	biker_object.is_hit();
 	}
 }
 
