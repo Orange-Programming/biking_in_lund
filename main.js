@@ -1,6 +1,9 @@
 var cc;
 var c;
 
+var music_source = 'static/music/uncle_marthas_will.mp3';
+var music_object = new Audio(music_source);
+
 var biker_object;
 
 var rightPressed = false;
@@ -26,6 +29,13 @@ window.onload = function() {
 
 	add_key_listeners();
 	initialize_game();
+
+    music_object.addEventListener('ended', function() {
+        this.currentTime = 0;
+        this.play();
+    }, false);
+
+    music_object.play();
 
 	setInterval(update, 1000/30);
 };
