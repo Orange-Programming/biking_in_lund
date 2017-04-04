@@ -42,12 +42,12 @@ function sprite(context, width, height, image, numberOfFrames, loop) {
 		}
 	};
 
-	that.flip = function(){
+	that.flip = function(dir){
 		//Switch image from source.png to source_flip.png and back
-		if (this.flipped) {
+		if (dir === 'left' || (dir != 'right' && this.flipped)) {
 			this.image.src = this.source;
 			this.flipped = false;
-		} else {
+		} else if (dir === 'right' || dir != 'left') {
 			var index = this.source.indexOf('.png');
 			this.image.src = this.source.slice(0, index) + '_flip.png';
 			this.flipped = true;

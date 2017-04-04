@@ -3,7 +3,7 @@ function Walker(canvas, x_position, y_position){
 	this.canvas_context = canvas.getContext("2d");
 
 	this.width = 24;
-	this.height = 56;
+	this.height = 60;
 
 	// position is not center, but corner
 	this.x_position = x_position; // right side of object
@@ -28,23 +28,30 @@ function Walker(canvas, x_position, y_position){
     this.image.src = walkerSources[Math.floor(Math.random()*walkerSources.length)];
 
     this.sprite = sprite(this.canvas_context, this.width*2 , this.height, this.image, 2, true);
-    if (this.direction < 0) {
-	this.sprite.flip();
-    }
+	this.look(['left','','right'][this.direction+1]);
 }
 
 Walker.prototype.draw = function() {
 	this.sprite.render(this.x_position, this.y_position);
 }
 
+Walker.prototype.look = function(dir) {
+	//Change the direction of the walker
+	if (dir === 'left') {
+		this.sprite.flip('left');
+	} else if (dir === 'right') {
+		this.sprite.flip('right');
+	}
+}
+
 Walker.prototype.update = function() {
 
     this.y_position -= this.movement;
-
-    if(this.x_position > this.x_start + this.limit || this.x_position < this.x_start - this.limit) {
-    	this.direction = -this.direction;
-	this.sprite.flip();
+    if (Math.random() <= (1/25)) {
+	//Pick another random direction: -1, 0 or 1
+	this.direction = (this.direction + 1 + Math.floor(Math.random()*2)) % 3 - 1;
+	this.look(['left','','right'][this.direction+1]);
     }
-    this.x_position -= this.direction * this.walk_step;
+    this.x_position += this.direction * this.walk_step;
     this.sprite.update();
 }
