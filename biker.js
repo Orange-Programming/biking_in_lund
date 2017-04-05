@@ -16,6 +16,8 @@ function Biker(canvas) {
 
 	this.is_alive = true;
 
+	this.atFinishLine = false;
+
 	this.image = new Image();
 	this.image.src = "static/img/biker_large.png";
 
@@ -28,15 +30,15 @@ Biker.prototype.is_hit = function() {
 }
 
 
-Biker.prototype.update = function(rightPressed, leftPressed,downPressed,upPressed) {
+Biker.prototype.update = function(rightPressed, leftPressed, downPressed, upPressed, endOfLevel) {
 
-	if (upPressed && this.upBoundaryCheck()) { // breaking  - can't move sideways or down
-		this.y_position -= this.movement;
-	}
 
-	else { // compatible movements
+	// compatible movements
+		if (upPressed && this.upBoundaryCheck()) { // break
+			this.y_position -= this.movement*0.5;
+		}
 		if (downPressed && this.downBoundaryCheck()) { // accelerate
-			 	this.y_position += this.movement;
+			this.y_position += this.movement;
 		}
 		if (rightPressed && this.rightBoundaryCheck()) { // can also move right
 			this.x_position += this.movement;
@@ -45,6 +47,10 @@ Biker.prototype.update = function(rightPressed, leftPressed,downPressed,upPresse
 			this.x_position -= this.movement;
 		}
 		// if both left and right, biker doesn't move in x-direction
+	
+
+	if (endOfLevel && (this.downBoundaryCheck() == false)) {
+		this.atFinishLine = true;
 	}
 
 	this.sprite.update();

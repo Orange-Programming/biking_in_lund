@@ -1,6 +1,9 @@
 var cc;
 var c;
 
+var music_source = 'static/music/uncle_marthas_will.mp3';
+var music_object = new Audio(music_source);
+
 var biker_object;
 
 var rightPressed = false;
@@ -19,6 +22,9 @@ var default_people_creation_speed = 38;
 var people_creation_speed = default_people_creation_speed;
 
 
+var endOfLevel = false;
+
+
 window.onload = function() {
 
 	c = document.getElementById('gc');
@@ -26,6 +32,13 @@ window.onload = function() {
 
 	add_key_listeners();
 	initialize_game();
+
+    music_object.addEventListener('ended', function() {
+        this.currentTime = 0;
+        this.play();
+    }, false);
+
+    music_object.play();
 
 	setInterval(update, 1000/30);
 };
@@ -75,12 +88,13 @@ function initialize_game() {
     frame_counter = 0;
     boundary_margin = 20;
     background_speed = 10;
+    upPressed = false;
     objects = [];
     people_creation_speed = parseInt(people_creation_speed / 2);
     if (people_creation_speed < 1) {
     	people_creation_speed = 1;
 	}
-    console.log(people_creation_speed);
+//    console.log(people_creation_speed);
 
     biker_object = new Biker(c);
 
@@ -89,6 +103,8 @@ function initialize_game() {
 
 
 function update() {
+
+	endOfLevel = background.levelFinished();
 	if (background.levelFinished() == false) {
 		frame_counter++;
 		updateRandomPersonSpawn(frame_counter);
@@ -98,19 +114,17 @@ function update() {
 
 		if (biker_object.is_alive) {
 			check_biker_in_collision();
-
-			var x_center = biker_object.x_position - biker_object.width/2;
-            var y_center = biker_object.y_position - biker_object.height/2;
-
-            if (background.isRoadAt(x_center, y_center)){
-			    score += 1000;
-            } else {
-                score += 0.3;
-            }
+			updateScore();
 		}
 		draw();
 	}
-	else if (biker_object.is_alive) {
+
+	else if (biker_object.is_alive && biker_object.atFinishLine == false) {
+		upPressed = true;
+		biker_object.update(rightPressed, leftPressed, upPressed, downPressed, endOfLevel);
+		draw();
+	}
+	else if (biker_object.is_alive && biker_object.atFinishLine == true) {
 		drawWin();
 	}
 
@@ -120,6 +134,16 @@ function update() {
 
 }
 
+function updateScore() {
+    var x_center = biker_object.x_position - biker_object.width/2;
+    var y_center = biker_object.y_position - biker_object.height/2;
+
+    if (background.isRoadAt(x_center, y_center)){
+        score += 3;
+    } else {
+        score += 0.3;
+    }
+}
 
 function updateRandomPersonSpawn(frame_counter) {
     if (frame_counter % people_creation_speed === 0){
