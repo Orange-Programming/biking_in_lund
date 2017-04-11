@@ -3,25 +3,25 @@ function Biker(canvas) {
 	this.canvas = canvas;
 	this.canvas_context = canvas.getContext('2d');
 
-	// position is not center, but corner
-	this.x_position = canvas.width / 2;
-	this.y_position = canvas.height / 6;
+    this.reset();
 
-	this.width = 40;
-	this.height = 64;
+	this.width = 30;
+	this.height = 40;
 
 	this.movement = background_speed;
-
 	this.boundary_margin = 32;
-
-	this.is_alive = true;
-
-	this.atFinishLine = false;
 
 	this.image = new Image();
 	this.image.src = "static/img/biker_large.png";
 
 	this.sprite = sprite(this.canvas_context, 160, 64, this.image, 4, true);
+}
+
+Biker.prototype.reset = function(canvas) {
+    this.x_position = this.canvas.width / 2;
+    this.y_position = this. canvas.height / 6;
+    this.atFinishLine = false;
+    this.is_alive = true;
 }
 
 Biker.prototype.is_hit = function() {
