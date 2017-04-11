@@ -123,7 +123,7 @@ var background = (function background() {
 	}
 
 	function arrayIndex(x_tile, y_tile, cols){
-		var index = x_tile + Math.floor(y_tile/cols);
+		var index = x_tile + Math.floor(y_tile*cols);
 		return index;
 	}
 
