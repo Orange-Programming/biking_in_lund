@@ -10,6 +10,7 @@ var rightPressed = false;
 var leftPressed = false;
 var upPressed = false;
 var downPressed = false;
+var resetPressed = false;
 var restart = false;
 
 var objects;
@@ -19,6 +20,8 @@ var boundary_margin;
 var background_speed;
 var offRoadSpeed;
 var onRoadSpeed;
+
+var level_wins = 0;
 
 var default_people_creation_speed = 38;
 var people_creation_speed = default_people_creation_speed;
@@ -61,7 +64,7 @@ function add_key_listeners() {
             downPressed = true;
         }
         if(event.keyCode == 88) {
-            initialize_game();
+            resetPressed = true;
         }
     }
 
@@ -77,6 +80,9 @@ function add_key_listeners() {
         }
         if(event.keyCode == 38) {
             downPressed = false;
+        }
+        if (event.keyCode == 88) {
+            resetPressed = false;
         }
     }
 
@@ -94,15 +100,26 @@ function initialize_game() {
     offRoadSpeed = 1;
     upPressed = false;
     objects = [];
-    people_creation_speed = parseInt(people_creation_speed / 2);
-    if (people_creation_speed < 1) {
-    	people_creation_speed = 1;
-	}
+    level_wins = 0;
 //    console.log(people_creation_speed);
+    people_creation_speed = default_people_creation_speed;
 
     biker_object = new Biker(c);
 
     background.loadLevel("level2", objects);
+}
+
+
+function win_reset_level() {
+
+    background.loadLevel("level2", objects);
+
+    people_creation_speed = parseInt(people_creation_speed * 0.7);
+    if (people_creation_speed < 1) {
+        people_creation_speed = 1;
+    }
+    level_wins += 1;
+    biker_object.reset();
 }
 
 
@@ -132,12 +149,18 @@ function update() {
 	}
 	else if (biker_object.is_alive && biker_object.atFinishLine == true) {
 		drawWin();
+
+        if (resetPressed) {
+            win_reset_level();
+        }
 	}
 
 	if (biker_object.is_alive == false) {
 		drawGameOver();
+        if (resetPressed) {
+            initialize_game();
+        }
 	}
-
 }
 
 function updateScore() {
@@ -243,9 +266,11 @@ function drawGameOver() {
 function drawWin() {
 	cc.font = "100px BadaBoom-BB";
 	cc.fillStyle = "yellow";
-	cc.fillText('CONGRATULATIONS!', 100, 220);
-	cc.fillText('YOU WIN', 270, 320)
-	cc.fillText('SCORE: ' + Math.floor(score), 230, 430);
+	cc.fillText('CONGRATULATIONS!', 100, 120);
+	cc.fillText('YOU WIN', 270, 220)
+	cc.fillText('SCORE: ' + Math.floor(score), 230, 330);
+	cc.fillText('LEVEL WINS: ' + level_wins, 230, 430);
+	cc.fillText('PRESS X TO CONTINUE', 230, 530);
 	cc.font = "35px BadaBoom-BB";
 	//cc.fillText('PRESS X TO START OVER', 280, 550);
 }

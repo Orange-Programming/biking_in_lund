@@ -2,7 +2,7 @@ function Tree(canvas, x_position, y_position) {
     this.canvas = canvas;
     this.canvas_context = canvas.getContext('2d');
 
-    this.width = 120;
+    this.width = 90;
     this.height = 96;
 
     this.x_position = x_position;
