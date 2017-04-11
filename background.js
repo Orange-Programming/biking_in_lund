@@ -118,7 +118,7 @@ var background = (function background() {
 		var index = arrayIndex(x_tile,y_tile,tile_cols_level);
 		// console.log('index' + index)
 		var value = level_data[index].value;
-		// console.log('value' + value);
+		console.log('value' + value)
 		return valueIsRoad(value);
 	}
 
@@ -128,8 +128,9 @@ var background = (function background() {
 	}
 
 	function valueIsRoad(value){
-		var roadValues = [3,4,5, 9,10,11, 15,16,17, 18,19,20,21,22,23, 24,25,26,27,28,29, 30,31,32];
-		var index = roadValues.indexOf(value); // -1 if missing
+        var roadValues = [4,5,6, 10,11,12, 16,17,18, 19,20,21,22,23,24, 25,26,27,28,29,30, 31,32,33];
+
+        var index = roadValues.indexOf(value); // -1 if missing
 		return index != -1;
 	}
     function setSpeed(speed) {

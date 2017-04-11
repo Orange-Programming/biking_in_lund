@@ -96,8 +96,8 @@ function initialize_game() {
     frame_counter = 0;
     boundary_margin = 20;
     background_speed = 10;
-    onRoadSpeed = 20;
-    offRoadSpeed = 1;
+    onRoadSpeed = 12;
+    offRoadSpeed = 9;
     upPressed = false;
     objects = [];
     level_wins = 0;
@@ -179,9 +179,9 @@ function updateSpeed() {
     var y_center = biker_object.y_position - biker_object.height/2;
 
     if (background.isRoadAt(x_center, y_center)){
-        background_speed = 12;
+        background_speed = onRoadSpeed;
     } else {
-        background_speed = 6;
+        background_speed = offRoadSpeed;
     }
 }
 
