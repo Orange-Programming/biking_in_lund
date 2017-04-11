@@ -132,11 +132,10 @@ function update() {
 		biker_object.update(rightPressed, leftPressed, upPressed, downPressed);
 		background.updateLevel(objects);
 		objects_update();
-        background_speed = offRoadSpeed;
 		if (biker_object.is_alive) {
 			check_biker_in_collision();
 			updateScore();
-			background_speed = onRoadSpeed;
+			updateSpeed();
 		}
 		background.setSpeed(background_speed);
 		draw();
@@ -174,6 +173,18 @@ function updateScore() {
         score += 0.3;
     }
 }
+
+function updateSpeed() {
+    var x_center = biker_object.x_position - biker_object.width/2;
+    var y_center = biker_object.y_position - biker_object.height/2;
+
+    if (background.isRoadAt(x_center, y_center)){
+        background_speed = 12;
+    } else {
+        background_speed = 6;
+    }
+}
+
 
 function updateRandomPersonSpawn(frame_counter) {
     if (frame_counter % people_creation_speed === 0){

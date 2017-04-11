@@ -58,7 +58,7 @@ var background = (function background() {
 	}
 
 	function updateLevel(game_objects) {
-		y_shift += scroll_speed;
+		y_shift += background_speed;//scroll_speed;
 	}
 
 	function drawLevel(canvas) {
