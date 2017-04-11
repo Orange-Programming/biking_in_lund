@@ -8,7 +8,7 @@ function Biker(canvas) {
 	this.width = 30;
 	this.height = 40;
 
-	this.movement = background_speed;
+	this.movement = 10;
 	this.boundary_margin = 32;
 
 	this.image = new Image();
