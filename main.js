@@ -17,6 +17,8 @@ var score;
 var frame_counter;
 var boundary_margin;
 var background_speed;
+var offRoadSpeed;
+var onRoadSpeed;
 
 var default_people_creation_speed = 38;
 var people_creation_speed = default_people_creation_speed;
@@ -88,6 +90,8 @@ function initialize_game() {
     frame_counter = 0;
     boundary_margin = 20;
     background_speed = 10;
+    onRoadSpeed = 20;
+    offRoadSpeed = 1;
     upPressed = false;
     objects = [];
     people_creation_speed = parseInt(people_creation_speed / 2);
@@ -111,11 +115,13 @@ function update() {
 		biker_object.update(rightPressed, leftPressed, upPressed, downPressed);
 		background.updateLevel(objects);
 		objects_update();
-
+        background_speed = offRoadSpeed;
 		if (biker_object.is_alive) {
 			check_biker_in_collision();
 			updateScore();
+			background_speed = onRoadSpeed;
 		}
+		background.setSpeed(background_speed);
 		draw();
 	}
 

@@ -58,7 +58,6 @@ var background = (function background() {
 	}
 
 	function updateLevel(game_objects) {
-
 		y_shift += scroll_speed;
 	}
 
@@ -133,13 +132,18 @@ var background = (function background() {
 		var index = roadValues.indexOf(value); // -1 if missing
 		return index != -1;
 	}
-
+    function setSpeed(speed) {
+        scroll_speed = speed;
+        //console.log('speed', speed, 'this scrollspeed', this.scroll_speed, 'ss', scroll_speed);
+    }
 	return {
 		loadLevel: loadLevel,
 		drawLevel: drawLevel,
 		updateLevel: updateLevel,
 		levelFinished: levelFinished,
-		isRoadAt: isRoadAt
+		isRoadAt: isRoadAt,
+		setSpeed: setSpeed
 	}
+
 
 }());

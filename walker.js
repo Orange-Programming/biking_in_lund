@@ -15,7 +15,7 @@ function Walker(canvas, x_position, y_position){
 	//random position
 	this.x_position += Math.floor(Math.random()*this.limit)*this.direction;
 
-	this.movement = 10;
+	this.movement;
 	this.walk_step = 3;
 
 	var walkerSources = [
@@ -45,7 +45,7 @@ Walker.prototype.look = function(dir) {
 }
 
 Walker.prototype.update = function() {
-
+	this.movement = background_speed;
     this.y_position -= this.movement;
     if (Math.random() <= (1/25)) {
 	//Pick another random direction: -1, 0 or 1

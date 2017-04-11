@@ -8,7 +8,7 @@ function Tree(canvas, x_position, y_position) {
     this.x_position = x_position;
     this.y_position = y_position;
 
-    this.movement = background_speed;
+    this.movement;
 
     this.image = new Image();
     this.image.src = "static/img/trees_2.png";
@@ -21,7 +21,6 @@ Tree.prototype.draw = function() {
 }
 
 Tree.prototype.update = function() {
-
-    this.y_position-=this.movement
-
+    this.movement = background_speed;
+    this.y_position-=this.movement;
 }
