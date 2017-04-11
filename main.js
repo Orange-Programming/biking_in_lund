@@ -101,7 +101,6 @@ function initialize_game() {
     upPressed = false;
     objects = [];
     level_wins = 0;
-//    console.log(people_creation_speed);
     people_creation_speed = default_people_creation_speed;
 
     biker_object = new Biker(c);
@@ -114,7 +113,8 @@ function win_reset_level() {
 
     background.loadLevel("level2", objects);
 
-    people_creation_speed = parseInt(people_creation_speed * 0.7);
+    upPressed = false;
+    people_creation_speed = parseInt(people_creation_speed * 0.6);
     if (people_creation_speed < 1) {
         people_creation_speed = 1;
     }
@@ -143,6 +143,7 @@ function update() {
 	}
 
 	else if (biker_object.is_alive && biker_object.atFinishLine == false) {
+
 		upPressed = true;
 		biker_object.update(rightPressed, leftPressed, upPressed, downPressed, endOfLevel);
 		draw();
@@ -264,13 +265,16 @@ function drawGameOver() {
 }
 
 function drawWin() {
+
+    var mid_pos = c.width / 2;
+
 	cc.font = "100px BadaBoom-BB";
 	cc.fillStyle = "yellow";
-	cc.fillText('CONGRATULATIONS!', 100, 120);
-	cc.fillText('YOU WIN', 270, 220)
-	cc.fillText('SCORE: ' + Math.floor(score), 230, 330);
-	cc.fillText('LEVEL WINS: ' + level_wins, 230, 430);
-	cc.fillText('PRESS X TO CONTINUE', 230, 530);
+	cc.textAlign = "center";
+	cc.fillText('CONGRATULATIONS!', mid_pos, 160);
+	cc.fillText('YOU WIN', mid_pos, 260)
+	cc.fillText('SCORE: ' + Math.floor(score), mid_pos, 360);
 	cc.font = "35px BadaBoom-BB";
-	//cc.fillText('PRESS X TO START OVER', 280, 550);
+	cc.fillText('LEVEL WINS: ' + (level_wins + 1), mid_pos, 460);
+	cc.fillText('PRESS X TO CONTINUE', mid_pos, 530);
 }
