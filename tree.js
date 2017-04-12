@@ -8,6 +8,8 @@ function Tree(canvas, x_position, y_position) {
     this.x_position = x_position;
     this.y_position = y_position;
 
+    this.collWidth = 65;
+
     this.movement;
 
     this.image = new Image();

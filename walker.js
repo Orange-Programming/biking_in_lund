@@ -8,6 +8,9 @@ function Walker(canvas, x_position, y_position){
 	// position is not center, but corner
 	this.x_position = x_position; // right side of object
 	this.y_position = y_position; // top side of object
+
+	this.collWidth = this.width;
+
 	this.x_start = x_position;
 	this.limit = 40;
 	this.direction = Math.floor(Math.random()*2)*2-1;

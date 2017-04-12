@@ -231,10 +231,11 @@ function collision(){
 	for (var i = 0; i < objects.length; i++){
 		var object1 = objects[i];
 	
-		if (object1.x_position + object1.width >= biker_object.x_position
+		if (object1.x_position + object1.collWidth >= biker_object.x_position
 			&& object1.x_position < biker_object.x_position + biker_object.width
 			&& object1.y_position + object1.height >= biker_object.y_position
 			&& object1.y_position < biker_object.y_position + biker_object.height){
+
             return 'biker'
 		}
 	}

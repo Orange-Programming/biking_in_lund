@@ -118,7 +118,7 @@ var background = (function background() {
 		var index = arrayIndex(x_tile,y_tile,tile_cols_level);
 		// console.log('index' + index)
 		var value = level_data[index].value;
-		console.log('value' + value)
+		// console.log('value' + value)
 		return valueIsRoad(value);
 	}
 
