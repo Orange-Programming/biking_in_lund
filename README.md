@@ -1,4 +1,4 @@
-## Biking in lund
+## Biking in Lund
 
 Try out our game! 
 Just use the arrow keys to navigate. Except from going left end right, you can also slow down and speed up.
